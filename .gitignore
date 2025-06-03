@@ -155,6 +155,9 @@ cython_debug/
 # DaisyUI dependency
 app/static/css/tailwindcss-windows-x64.exe
 
+# Database configuration
+app/config.py
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

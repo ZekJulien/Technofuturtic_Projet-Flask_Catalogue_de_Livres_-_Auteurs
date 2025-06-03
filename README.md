@@ -44,6 +44,8 @@ To enhance usability, you may implement:
 ## 📁 Project Structure
 ```bash
 📦 app
+ ┃ 📂 database/               # Manages connection and session
+ ┃ ┗ 📜 database.py
  ┣ 📂 static                  # CSS, JS, images
  ┣ 📂 templates               # HTML templates (Jinja2)
  ┣ 📂 models                  # SQLAlchemy models (Entities)
