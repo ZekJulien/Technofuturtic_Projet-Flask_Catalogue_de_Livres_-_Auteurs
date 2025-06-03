@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from .config import SECRET_KEY, URL_DB
-from .database import db, engine
+from .database import db
+from .routes import blueprints
 
 app = Flask(__name__)
 
@@ -16,3 +17,6 @@ try:
     print("✅ Database initialized successfully!")
 except Exception as e:
     print(f"🛑 Database initialization failed:\n{e}")
+
+for bp in blueprints:
+    app.register_blueprint(bp)
