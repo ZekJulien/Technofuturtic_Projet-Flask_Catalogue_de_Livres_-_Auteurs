@@ -21,3 +21,20 @@ class CategoryService:
             return self.category_repository.get_all()
         except Exception as e:
             raise Exception(f"An unexpected error occurred while retrieving all category: {str(e)}")
+        
+    def get_by_id(self, id : int) -> Category:
+        try:
+            return self.category_repository.get_by_id(id)
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while retrieving the category: {str(e)}")
+    
+    def delete(self, id : int) -> bool:
+        try:
+            category = self.category_repository.get_by_id(id)
+            if not isinstance(category, Category):
+                raise Exception("Error: The provided ID does not exist")
+            if self.category_repository.delete(category):
+                return True
+            raise Exception("Error: Failed to delete the category from the repository.")
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while deleting the category: {str(e)}")

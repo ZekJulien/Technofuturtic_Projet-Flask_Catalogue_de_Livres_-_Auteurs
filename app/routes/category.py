@@ -17,3 +17,8 @@ def category():
     form = CategoryForm()
     categories = category_service.get_all()
     return render_template("category/category.html", form=form, categories = categories)
+
+@category_bp.route("/category/delete/<int:id>",methods=['GET', 'DELETE'])
+def delete_author(id : int):
+    if category_service.delete(id):
+        return redirect(url_for('category.category'))
