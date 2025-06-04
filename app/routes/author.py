@@ -1,21 +1,21 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request
 from app.services import AuthorService
-from app.forms import AddAuthorForm
+from app.forms import AuthorForm
+from app.models import Author
 
 author_bp = Blueprint("author", __name__)
 author_service = AuthorService()
 
-@author_bp.route("/author/add", methods=['GET', 'POST'])
+@author_bp.route("/author/add", methods=['POST'])
 def add_author():
-    form = AddAuthorForm()
+    form = AuthorForm()
     if form.validate_on_submit():
         author_service.add_author(name=form.name.data, country=form.country.data)
         return redirect(url_for('author.author'))
-    return render_template('author/add_author.html', form=form)
 
 @author_bp.route("/author", methods=['GET'])
 def author():
-    form = AddAuthorForm()
+    form = AuthorForm()
     authors = author_service.get_all()
     return render_template("author/author.html", form=form, authors = authors)
 
@@ -23,3 +23,13 @@ def author():
 def delete_author(id : int):
     if author_service.delete(id):
         return redirect(url_for('author.author'))
+
+@author_bp.route("/author/update",methods=['POST'])
+def update_author():
+    form = AuthorForm()
+    author_id = request.form.get("id")
+    if author_id:
+        author = author_service.get_by_id(author_id)
+        if form.validate_on_submit():
+            if author_service.update(id=author.id, name=form.name.data, country=form.country.data):
+                return redirect(url_for('author.author'))

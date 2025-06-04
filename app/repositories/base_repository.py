@@ -30,3 +30,9 @@ class BaseRepository(Generic[T]):
             session.delete(entity)
             session.commit()
             return True
+        
+    def update(self, entity : T):
+        with get_session() as session:
+            session.merge(entity)
+            session.commit()
+            return True
