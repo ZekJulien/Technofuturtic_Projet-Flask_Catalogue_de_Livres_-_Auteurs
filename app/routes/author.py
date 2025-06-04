@@ -28,7 +28,6 @@ def update_author():
     form = AuthorForm()
     author_id = request.form.get("id")
     if author_id:
-        author = author_service.get_by_id(author_id)
         if form.validate_on_submit():
-            if author_service.update(id=author.id, name=form.name.data, country=form.country.data):
+            if author_service.update(id=author_id, name=form.name.data, country=form.country.data):
                 return redirect(url_for('author.author'))
