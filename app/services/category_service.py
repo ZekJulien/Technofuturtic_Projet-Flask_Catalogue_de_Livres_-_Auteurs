@@ -14,4 +14,10 @@ class CategoryService:
             new_category = Category(name=name)
             return self.category_repository.add(new_category)
         except Exception as e:
-            raise Exception(f"An unexpected error occurred while adding the author: {str(e)}")
+            raise Exception(f"An unexpected error occurred while adding the category: {str(e)}")
+        
+    def get_all(self) -> list[Category]:
+        try:
+            return self.category_repository.get_all()
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while retrieving all category: {str(e)}")

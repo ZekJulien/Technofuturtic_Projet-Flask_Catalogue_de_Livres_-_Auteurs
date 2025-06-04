@@ -15,4 +15,5 @@ def add_category():
 @category_bp.route("/category", methods=['GET'])
 def category():
     form = CategoryForm()
-    return render_template("category/category.html", form=form)
+    categories = category_service.get_all()
+    return render_template("category/category.html", form=form, categories = categories)
