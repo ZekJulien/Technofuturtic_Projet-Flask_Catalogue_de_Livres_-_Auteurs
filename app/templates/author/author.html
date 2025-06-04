@@ -2,16 +2,50 @@
 
 {% block title %}Author{% endblock %}
 
-
 {% block content %}
 
-<button class="btn btn-primary" onclick="modal_add_author.showModal()">Add</button>
-<dialog id="modal_add_author" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
-    {% include "author/add_author.html" %}
-    <div class="modal-action">
+
+<div class="flex w-full flex-col lg:flex-row rounded-box bg-base-200 mt-4 mb-4 p-4">
+    <div class="card rounded-box grid grow place-items-center justify-start">
+        <h1 class="text-xl font-bold">Author list</h1>
     </div>
-  </div>
-</dialog>
+    <div class="card rounded-box grid grow place-items-center justify-end">
+        <div class="flex justify-end">
+            <button class="btn btn-outline btn-accent" onclick="modal_add_author.showModal()">New author</button>
+            <dialog id="modal_add_author" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                    {% include "author/add_author.html" %}
+                    <div class="modal-action">
+                    </div>
+                </div>
+            </dialog>
+        </div>
+    </div>
+</div>
+
+
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-200">
+    <table class="table table-zebra">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th class="w-15 text-center">#</th>
+                <th>Name</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr class="hover:bg-primary/20">
+                <th class="text-center">{{ loop.index }}</th>
+                <td>{{ author.name }}</td>
+                <td>{{ author.country }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
 
 {% endblock %}

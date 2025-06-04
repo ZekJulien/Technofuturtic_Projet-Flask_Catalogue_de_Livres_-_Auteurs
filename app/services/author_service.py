@@ -16,3 +16,6 @@ class AuthorService:
             if len(country) > 100:
                 raise ValueError("Max lenght for name is 100.")
         return self.author_repository.add(new_author)
+
+    def get_all(self) -> list[Author]:
+        return self.author_repository.get_all()
