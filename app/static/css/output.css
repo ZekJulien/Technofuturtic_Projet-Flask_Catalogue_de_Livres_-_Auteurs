@@ -807,6 +807,12 @@
   .static {
     position: static;
   }
+  .sticky {
+    position: sticky;
+  }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
   .modal-box {
     grid-column-start: 1;
     grid-row-start: 1;
@@ -906,6 +912,9 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
@@ -944,6 +953,9 @@
   }
   .grid {
     display: grid;
+  }
+  .hidden {
+    display: none;
   }
   .table {
     display: table;
@@ -1067,6 +1079,9 @@
       border-color: color-mix(in oklab, var(--color-base-content) 5%, transparent);
     }
   }
+  .border-white {
+    border-color: var(--color-white);
+  }
   .table-zebra {
     tbody {
       tr {
@@ -1103,10 +1118,24 @@
   .bg-transparent {
     background-color: transparent;
   }
+  .divider-error {
+    &:before, &:after {
+      background-color: var(--color-error);
+    }
+  }
   .divider-primary {
     &:before, &:after {
       background-color: var(--color-primary);
     }
+  }
+  .fill-error {
+    fill: var(--color-error);
+  }
+  .fill-primary {
+    fill: var(--color-primary);
+  }
+  .stroke-white {
+    stroke: var(--color-white);
   }
   .p-1 {
     padding: calc(var(--spacing) * 1);
@@ -1145,6 +1174,9 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
+  }
+  .text-primary {
+    color: var(--color-primary);
   }
   .text-red-500 {
     color: var(--color-red-500);
@@ -1203,17 +1235,47 @@
     --btn-color: var(--color-accent);
     --btn-fg: var(--color-accent-content);
   }
+  .btn-error {
+    --btn-color: var(--color-error);
+    --btn-fg: var(--color-error-content);
+  }
   .btn-primary {
     --btn-color: var(--color-primary);
     --btn-fg: var(--color-primary-content);
+  }
+  .btn-secondary {
+    --btn-color: var(--color-secondary);
+    --btn-fg: var(--color-secondary-content);
   }
   .btn-success {
     --btn-color: var(--color-success);
     --btn-fg: var(--color-success-content);
   }
+  .input-error {
+    &, &:focus, &:focus-within {
+      --input-color: var(--color-error);
+    }
+  }
   .input-primary {
     &, &:focus, &:focus-within {
       --input-color: var(--color-primary);
+    }
+  }
+  .group-hover\:fill-white {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        fill: var(--color-white);
+      }
+    }
+  }
+  .group-focus\:fill-white {
+    &:is(:where(.group):focus *) {
+      fill: var(--color-white);
+    }
+  }
+  .group-active\:fill-white {
+    &:is(:where(.group):active *) {
+      fill: var(--color-white);
     }
   }
   .hover\:bg-blue-200 {
@@ -1245,6 +1307,73 @@
           background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
         }
       }
+    }
+  }
+  .hover\:bg-transparent {
+    &:hover {
+      @media (hover: hover) {
+        background-color: transparent;
+      }
+    }
+  }
+  .hover\:fill-white {
+    &:hover {
+      @media (hover: hover) {
+        fill: var(--color-white);
+      }
+    }
+  }
+  .hover\:stroke-white {
+    &:hover {
+      @media (hover: hover) {
+        stroke: var(--color-white);
+      }
+    }
+  }
+  .hover\:btn-ghost {
+    &:hover {
+      @media (hover: hover) {
+        &:not(.btn-active, :hover, :active:focus, :focus-visible) {
+          --btn-shadow: "";
+          --btn-bg: #0000;
+          --btn-border: #0000;
+          --btn-noise: none;
+          &:not(:disabled, [disabled], .btn-disabled) {
+            outline-color: currentColor;
+            --btn-fg: currentColor;
+          }
+        }
+        @media (hover: none) {
+          &:hover:not(.btn-active, :active, :focus-visible, :disabled, [disabled], .btn-disabled) {
+            --btn-shadow: "";
+            --btn-bg: #0000;
+            --btn-border: #0000;
+            --btn-noise: none;
+            --btn-fg: currentColor;
+          }
+        }
+      }
+    }
+  }
+  .focus\:fill-white {
+    &:focus {
+      fill: var(--color-white);
+    }
+  }
+  .focus\:stroke-white {
+    &:focus {
+      stroke: var(--color-white);
+    }
+  }
+  .focus\:outline-none {
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+  }
+  .active\:fill-white {
+    &:active {
+      fill: var(--color-white);
     }
   }
   .sm\:modal-middle {

@@ -18,3 +18,8 @@ def author():
     form = AddAuthorForm()
     authors = author_service.get_all()
     return render_template("author/author.html", form=form, authors = authors)
+
+@author_bp.route("/author/delete/<int:id>",methods=['GET', 'DELETE'])
+def delete_author(id : int):
+    if author_service.delete(id):
+        return redirect(url_for('author.author'))
