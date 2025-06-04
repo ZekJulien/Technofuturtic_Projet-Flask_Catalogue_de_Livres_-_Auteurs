@@ -34,7 +34,7 @@ class AuthorService:
     
     def delete(self, id : int) -> bool:
         try:
-            author = self.get_by_id(id)
+            author = self.author_repository.get_by_id(id)
             if not isinstance(author, Author):
                 raise Exception("Error: The provided ID does not exist")
             if self.author_repository.delete(author):
@@ -42,3 +42,16 @@ class AuthorService:
             raise Exception("Error: Failed to delete the author from the repository.")
         except Exception as e:
             raise Exception(f"An unexpected error occurred while deleting the author: {str(e)}")
+    
+    def update(self,id : int, name : str, country : str | None = None):
+        try:
+            author = self.author_repository.get_by_id(id)
+            if not isinstance(author, Author):
+                raise Exception("Error: The provided ID does not exist")
+            author.name = name or author.name
+            author.country = country or author.country
+            if self.author_repository.update(author):
+                return True
+            raise Exception("Error: Failed to delete the author from the repository.")
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while updating the author: {str(e)}")
