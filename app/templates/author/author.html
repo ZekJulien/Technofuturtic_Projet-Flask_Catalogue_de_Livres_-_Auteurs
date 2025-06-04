@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block title %}Author{% endblock %}
+
+
+{% block content %}
+
+<button class="btn btn-primary" onclick="modal_add_author.showModal()">Add</button>
+<dialog id="modal_add_author" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    {% include "author/add_author.html" %}
+    <div class="modal-action">
+    </div>
+  </div>
+</dialog>
+
+{% endblock %}
