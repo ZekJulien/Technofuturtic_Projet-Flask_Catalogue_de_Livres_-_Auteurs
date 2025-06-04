@@ -1,0 +1,18 @@
+from typing import TypeVar, Generic
+from sqlalchemy.orm import Session
+from app.database import get_session
+from sqlalchemy.orm import declarative_base
+
+T = TypeVar("T", bound=declarative_base)
+
+class BaseRepository(Generic[T]):
+    model: T
+
+    def __init__(self, model: T):
+        self.model = model
+
+    def add(self, entity: T) -> T:
+        with get_session() as session:
+            session.add(entity)
+            session.commit()
+            return entity
