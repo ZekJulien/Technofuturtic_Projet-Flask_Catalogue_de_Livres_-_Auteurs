@@ -38,3 +38,15 @@ class CategoryService:
             raise Exception("Error: Failed to delete the category from the repository.")
         except Exception as e:
             raise Exception(f"An unexpected error occurred while deleting the category: {str(e)}")
+      
+    def update(self,id : int, name : str):
+        try:
+            category = self.category_repository.get_by_id(id)
+            if not isinstance(category, Category):
+                raise Exception("Error: The provided ID does not exist")
+            category.name = name or category.name
+            if self.category_repository.update(category):
+                return True
+            raise Exception("Error: Failed to delete the category from the repository.")
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while updating the category: {str(e)}")
