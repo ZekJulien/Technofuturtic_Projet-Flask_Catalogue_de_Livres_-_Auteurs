@@ -16,3 +16,7 @@ class BaseRepository(Generic[T]):
             session.add(entity)
             session.commit()
             return entity
+        
+    def get_all(self) -> list[T]:
+        with get_session() as session:
+            return session.query(self.model).all()

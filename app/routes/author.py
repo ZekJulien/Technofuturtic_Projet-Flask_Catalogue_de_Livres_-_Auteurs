@@ -16,4 +16,5 @@ def add_author():
 @author_bp.route("/author", methods=['GET'])
 def author():
     form = AddAuthorForm()
-    return render_template("author/author.html", form=form)
+    authors = author_service.get_all()
+    return render_template("author/author.html", form=form, authors = authors)
