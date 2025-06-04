@@ -1,1 +1,2 @@
-from .author.add_form import AuthorForm
+from .author_form import AuthorForm
+from .category_form import CategoryForm

@@ -1,2 +1,3 @@
 from .base_repository import BaseRepository
 from .author_repository import AuthorRepository
+from .category_repository import CategoryRepository

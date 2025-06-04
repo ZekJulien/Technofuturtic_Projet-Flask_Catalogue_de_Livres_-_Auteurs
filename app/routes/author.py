@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from app.services import AuthorService
 from app.forms import AuthorForm
-from app.models import Author
 
 author_bp = Blueprint("author", __name__)
 author_service = AuthorService()
