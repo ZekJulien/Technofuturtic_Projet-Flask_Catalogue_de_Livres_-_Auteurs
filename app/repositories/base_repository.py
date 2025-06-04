@@ -11,7 +11,7 @@ class BaseRepository(Generic[T]):
     def __init__(self, model: T):
         self.model = model
 
-    def add(self, entity: T) -> T:
+    def add(self, entity : T) -> T:
         with get_session() as session:
             session.add(entity)
             session.commit()
@@ -20,3 +20,13 @@ class BaseRepository(Generic[T]):
     def get_all(self) -> list[T]:
         with get_session() as session:
             return session.query(self.model).all()
+        
+    def get_by_id(self, id : int) -> T:
+        with get_session() as session:
+            return session.query(self.model).filter(self.model.id == id).first()
+        
+    def delete(self, entity : T):
+        with get_session() as session:
+            session.delete(entity)
+            session.commit()
+            return True
