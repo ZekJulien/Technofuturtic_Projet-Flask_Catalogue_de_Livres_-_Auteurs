@@ -6,3 +6,5 @@ class Category(Base):
     __tablename__ = "category"
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     name = Column(String(100), nullable=False)
+
+    books = relationship("Book", secondary="book_category", back_populates="categories")

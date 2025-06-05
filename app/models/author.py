@@ -8,5 +8,4 @@ class Author(Base):
     name = Column(String(100), nullable=False)
     country = Column(String(100), nullable=True)
 
-    # Waiting book model
-    #books = relationship("Book", back_populates="author")
+    books = relationship("Book", back_populates="author")

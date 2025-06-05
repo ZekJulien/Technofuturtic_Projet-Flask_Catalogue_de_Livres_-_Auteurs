@@ -19,8 +19,9 @@
             </div>
             <div class="flex-none">
                 <ul class="menu menu-horizontal px-1">
-                    <li><a href="author">Authors</a></li>
-                    <li><a href="category">Category</a></li>
+                    <li><a href="{{ url_for('author.author') }}">Authors</a></li>
+                    <li><a href="{{ url_for('category.category') }}">Category</a></li>
+                    <li><a href="{{ url_for('book.book') }}">Book</a></li>
                 </ul>
             </div>
         </div>
