@@ -30,8 +30,9 @@
                 <th class="w-15 text-center">#</th>
                 <th>Title</th>
                 <th>Genre</th>
-                <th>Publication date</th>
-                <th>Category</th>
+                <th>Author</th>
+                <th>Categories</th>
+                <th class="text-center">Publication date</th>
                 <th class="w-30 text-center">Action</th>
             </tr>
         </thead>
@@ -41,8 +42,13 @@
                 <th class="text-center">{{ loop.index }}</th>
                 <td>{{ book.title }}</td>
                 <td>{{ book.genre }}</td>
-                <td>{{ book.publication_date }}</td>
-                <td>{{ book.category.name }}</td>
+                <td>{{ authors[book.id_author].name }}</td>
+                <td>
+                    {% for category in book.categories %}
+                        <div class="badge badge-primary">{{ category.name }} </div>
+                    {% endfor %}
+                </td>
+                <td class="text-center">{{ book.publication_date }}</td>
                 <td class="justify-end">
                     <div class="flex space-x-4">
                         <!-- DELETE -->

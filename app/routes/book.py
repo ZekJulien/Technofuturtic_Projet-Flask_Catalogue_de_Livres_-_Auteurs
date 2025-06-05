@@ -8,27 +8,23 @@ author_service = AuthorService()
 catgories_service = CategoryService()
 
 @book_bp.route("/book", methods=['GET'])
-def book():
-    form = BookForm()
+def book(form = None, show_add_modal_on_error=False):
+    if form is None:  
+        form = BookForm()
     authors = author_service.get_all()
     categories = catgories_service.get_all()
     form.categories.choices = [(category.id, category.name) for category in categories]
-    #books = []
-    return render_template("book/book.html", form=form, authors=authors, categories=categories)
+    books = book_service.get_all()
+    authors_dict = {author.id: author for author in authors}
+    return render_template("book/book.html", form=form, authors=authors_dict, books = books,  show_add_modal_on_error=show_add_modal_on_error)
 
 
 @book_bp.route("/book/add", methods=['POST'])
 def add_book():
     form = BookForm()
-    authors = author_service.get_all()
     categories = catgories_service.get_all()
-    form.categories.choices = [(category.id, category.name) for category in categories]
+    form.categories.choices = [(category.id, category.name) for category in categories] 
     if form.validate_on_submit():
-        book_service.add_book(title=form.title.data, genre=form.title.data, publication_date=form.publication_date.data, id_author=form.id_author.data, category_ids=form.categories.data)
+        book_service.add_book(title=form.title.data, genre=form.genre.data, publication_date=form.publication_date.data, id_author=form.id_author.data, category_ids=form.categories.data)
         return redirect(url_for('book.book'))
-    return render_template(
-        "book/book.html",
-        form=form,
-        authors=authors,
-        show_add_modal_on_error=True
-    )
+    return book(form=form, show_add_modal_on_error=True)
