@@ -56,8 +56,8 @@
 				</svg>
 			</label>
 			<select type="text" name="id_author" id="id_author" value="{{ form.id_author.data }}">
-				{% for author in authors %}
-				<option value="{{ author.id }}">{{ author.name }}</option>
+				{% for id, author in authors.items() %}
+				<option value="{{ id }}">{{ author.name }}</option>
 				{% endfor %}
 			</select>
 		</label>

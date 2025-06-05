@@ -40,3 +40,6 @@ class BookService:
             ))
         except Exception as e:
             raise Exception(f"An unexpected error occurred while adding the book: {str(e)}")
+        
+    def get_all(self) -> list[Book]:
+        return self.book_repository.get_all()
