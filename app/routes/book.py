@@ -28,3 +28,8 @@ def add_book():
         book_service.add_book(title=form.title.data, genre=form.genre.data, publication_date=form.publication_date.data, id_author=form.id_author.data, category_ids=form.categories.data)
         return redirect(url_for('book.book'))
     return book(form=form, show_add_modal_on_error=True)
+
+@book_bp.route("/book/delete/<int:id>",methods=['GET', 'DELETE'])
+def delete_book(id : int):
+    if book_service.delete(id):
+        return redirect(url_for('book.book'))
