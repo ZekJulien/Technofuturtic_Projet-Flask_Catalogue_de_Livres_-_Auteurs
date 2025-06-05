@@ -43,3 +43,14 @@ class BookService:
         
     def get_all(self) -> list[Book]:
         return self.book_repository.get_all()
+    
+    def delete(self, id : int) -> bool:
+        try:
+            book = self.book_repository.get_by_id(id)
+            if not isinstance(book, Book):
+                raise Exception("Error: The provided ID does not exist")
+            if self.book_repository.delete(book):
+                return True
+            raise Exception("Error: Failed to delete the book from the repository.")
+        except Exception as e:
+            raise Exception(f"An unexpected error occurred while deleting the book: {str(e)}")

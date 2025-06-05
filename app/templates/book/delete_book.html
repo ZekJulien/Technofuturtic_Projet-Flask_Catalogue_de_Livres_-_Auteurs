@@ -1,43 +1,32 @@
-<h3 class="text-xl font-bold">Add a new book</h3>
-<div class="divider divider-accent"></div>
-{% if form.errors %}
-<div class="alert alert-error">
-	<ul>
-		{% for field, errors in form.errors.items() %}
-		{% for error in errors %}
-		<li>{{ field }} : {{ error }}</li>
-		{% endfor %}
-		{% endfor %}
-	</ul>
-</div>
-{% endif %}
-<form method="POST" id="bookForm" action="{{ url_for('book.add_book') }}">
+<h3 class="text-xl font-bold">Are you sure you want to delete this book?</h3>
+<div class="divider divider-error"></div>
+<form method="POST">
 	{{ form.hidden_tag() }}
 
 	<label class="label text-white">{{ form.title.label }}</label>
-	<label class="input input-accent w-full mt-1">
+	<label class="input input-error w-full mt-1">
 		<label class="label">
 			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
 				<path
 					d="M554-120q-54 0-91-37t-37-89q0-76 61.5-137.5T641-460q-3-36-18-54.5T582-533q-30 0-65 25t-83 82q-78 93-114.5 121T241-277q-51 0-86-38t-35-92q0-54 23.5-110.5T223-653q19-26 28-44t9-29q0-7-2.5-10.5T250-740q-10 0-25 12.5T190-689l-70-71q32-39 65-59.5t65-20.5q46 0 78 32t32 80q0 29-15 64t-50 84q-38 54-56.5 95T220-413q0 17 5.5 26.5T241-377q10 0 17.5-5.5T286-409q13-14 31-34.5t44-50.5q63-75 114-107t107-32q67 0 110 45t49 123h99v100h-99q-8 112-58.5 178.5T554-120Zm2-100q32 0 54-36.5T640-358q-46 11-80 43.5T526-250q0 14 8 22t22 8Z" />
 			</svg>
 		</label>
-		{{ form.title() }}
+		{{ form.title(value=book.title, disabled=True) }}
 	</label>
 
 	<label class="label mt-1 text-white">{{ form.genre.label }}</label>
-	<label class="input input-accent w-full mt-1">
+	<label class="input input-error w-full mt-1">
 		<label class="label">
 			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
 				<path
 					d="M554-120q-54 0-91-37t-37-89q0-76 61.5-137.5T641-460q-3-36-18-54.5T582-533q-30 0-65 25t-83 82q-78 93-114.5 121T241-277q-51 0-86-38t-35-92q0-54 23.5-110.5T223-653q19-26 28-44t9-29q0-7-2.5-10.5T250-740q-10 0-25 12.5T190-689l-70-71q32-39 65-59.5t65-20.5q46 0 78 32t32 80q0 29-15 64t-50 84q-38 54-56.5 95T220-413q0 17 5.5 26.5T241-377q10 0 17.5-5.5T286-409q13-14 31-34.5t44-50.5q63-75 114-107t107-32q67 0 110 45t49 123h99v100h-99q-8 112-58.5 178.5T554-120Zm2-100q32 0 54-36.5T640-358q-46 11-80 43.5T526-250q0 14 8 22t22 8Z" />
 			</svg>
 		</label>
-		{{ form.genre() }}
+		{{ form.genre(value=book.genre, disabled=True) }}
 	</label>
 
 	<label class="label mt-1 text-white">{{ form.publication_date.label }}</label>
-	<label class="input input-accent w-full mt-1">
+	<label class="input input-error w-full mt-1">
 		<label class="label">
 			<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
 				width="24px" fill="#e8eaed">
@@ -51,11 +40,11 @@
 				</g>
 			</svg>
 		</label>
-		{{ form.publication_date() }}
+		{{ form.publication_date(value=book.publication_date, disabled=True) }}
 	</label>
 
 	<label class="label mt-1 text-white">{{ form.id_author.label }}</label>
-	<label class="select select-accent w-full mt-1">
+	<label class="select select-error w-full mt-1">
 		<label class="label">
 			<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
 				width="24px" fill="#e8eaed">
@@ -68,7 +57,7 @@
 				</g>
 			</svg>
 		</label>
-		<select type="text" name="id_author" id="id_author" value="{{ form.id_author.data }}">
+		<select type="text" name="id_author" id="id_author" value="{{ form.id_author.data }}" disabled>
 			{% for id, author in authors.items() %}
 			<option value="{{ id }}">{{ author.name }}</option>
 			{% endfor %}
@@ -76,18 +65,15 @@
 	</label>
 	<!-- {{ form.categories() }} -->
 	<label class="label mt-1 text-white">{{ form.categories.label }}</label>
-	<div class="mt-1 border border-accent rounded-lg p-2">
-		{% for category in form.categories.choices %}
-		<label class="flex items-center gap-2">
-			<input type="checkbox" name="categories" value="{{ category[0] }}" class="checkbox checkbox-accent mt-1" {%
-				if category[0] in request.form.getlist("categories") %}checked{% endif %}>
-			<span class="text-white">{{ category[1] }}</span>
-		</label>
-		{% endfor %}
+	<div class="mt-1 rounded-lg p-2">
+		{% for category in book.categories %}
+            <div class="badge badge-error">{{ category.name }} </div>
+        {% endfor %}
 	</div>
 
 	<div class="flex gap-4 mt-4 justify-start flex-row-reverse">
-		<button type="submit" class="btn btn-accent">Confirm</button>
+		<a type="submit" href="book/delete/{{ book.id }}"
+                                            class="btn btn-error">Confirm</a>
 </form>
 <form method="dialog">
 	<a href="{{ url_for('book.book') }}" class="btn btn-primary btn-dash">Close</a>

@@ -1568,6 +1568,9 @@
       border-color: color-mix(in oklab, var(--color-base-content) 5%, transparent);
     }
   }
+  .border-error {
+    border-color: var(--color-error);
+  }
   .table-zebra {
     tbody {
       tr {
@@ -1663,6 +1666,10 @@
     color: var(--color-accent-content);
     --input-color: var(--color-accent);
   }
+  .checkbox-error {
+    color: var(--color-error-content);
+    --input-color: var(--color-error);
+  }
   .checkbox-primary {
     color: var(--color-primary-content);
     --input-color: var(--color-primary);
@@ -1724,6 +1731,10 @@
       }
     }
   }
+  .badge-error {
+    --badge-color: var(--color-error);
+    --badge-fg: var(--color-error-content);
+  }
   .badge-neutral {
     --badge-color: var(--color-neutral);
     --badge-fg: var(--color-neutral-content);
@@ -1749,6 +1760,11 @@
       --input-color: var(--color-accent);
     }
   }
+  .input-error {
+    &, &:focus, &:focus-within {
+      --input-color: var(--color-error);
+    }
+  }
   .input-primary {
     &, &:focus, &:focus-within {
       --input-color: var(--color-primary);
@@ -1757,6 +1773,11 @@
   .select-accent {
     &, &:focus, &:focus-within {
       --input-color: var(--color-accent);
+    }
+  }
+  .select-error {
+    &, &:focus, &:focus-within {
+      --input-color: var(--color-error);
     }
   }
   .select-primary {
