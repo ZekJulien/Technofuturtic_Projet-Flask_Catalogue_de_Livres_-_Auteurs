@@ -35,7 +35,7 @@
         <tbody>
             {% for category in categories | sort(attribute="id") %}
             <tr class="hover:bg-primary/20">
-                <th class="text-center">{{ loop.index }}</th>
+                <th class="text-center">{{ (page - 1) * per_page + loop.index }}</th>
                 <td>{{ category.name }}</td>
                 <td class="justify-end">
                     <div class="flex space-x-4">
@@ -111,8 +111,34 @@
 </div>
 
 
-
-
+<div class="flex w-full flex-col lg:flex-row rounded-box bg-base-200 mt-4 mb-4 p-4">
+    <div class="card rounded-box grid grow place-items-center justify-start">
+        <div class="text-gray-400">
+    Page {{ page }} of {{ total_pages }}
+</div>
+    </div>
+    <div class="card rounded-box grid grow place-items-center justify-end">
+        {% if total_pages > 4 %}
+        <div class="join">
+            {% if page > 1 %}
+                <a href="{{ url_for('category.category', page=page-1) }}" class="join-item btn btn-primary btn-dash">Previous</a>
+            {% endif %}
+            {% if page < total_pages %}
+                <a href="{{ url_for('category.category', page=page+1) }}" class="join-item btn btn-primary">Next</a>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="join">
+            {% for page_num in range(1, total_pages + 1) %}
+            <a href="{{ url_for('category.category', page=page_num) }}"
+                class="join-item btn {% if page == page_num %}btn-primary{% else %}btn-primary btn-dash{% endif %}">
+                {{ page_num }}
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
 
 
 {% endblock %}

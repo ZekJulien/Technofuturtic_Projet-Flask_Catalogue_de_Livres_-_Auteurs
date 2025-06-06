@@ -37,13 +37,23 @@ def render_book_page(form: BookForm = None, show_add_modal_on_error: bool = Fals
     """
     form = init_book_form(form)
     authors = author_service.get_all()
-    books = book_service.get_all()
     authors_dict = {author.id: author for author in authors}
+    all_books = book_service.get_all()  
+    total_books = len(all_books)  
+    page = request.args.get("page", 1, type=int)  
+    per_page = 5
+    start = (page-1) * per_page
+    end = start + per_page
+
+    paginated_books = all_books[start:end]
     return render_template(
         "book/book.html",
         form=form,
         authors=authors_dict,
-        books=books,
+        books=paginated_books,
+        page=page,
+        per_page=per_page,
+        total_pages=(total_books // per_page) + (1 if total_books % per_page else 0),
         show_add_modal_on_error=show_add_modal_on_error,
         show_update_modal_on_error=show_update_modal_on_error,
         update_book_id=update_book_id if show_update_modal_on_error else None

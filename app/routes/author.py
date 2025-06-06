@@ -16,7 +16,20 @@ def add_author():
 def author():
     form = AuthorForm()
     authors = author_service.get_all()
-    return render_template("author/author.html", form=form, authors = authors)
+    total_authors = len(authors)  
+    page = request.args.get("page", 1, type=int)  
+    per_page = 5
+    start = (page-1) * per_page
+    end = start + per_page
+
+    paginated_authors = authors[start:end]
+    return render_template("author/author.html",
+                            form=form,
+                            authors = paginated_authors,
+                            page=page,
+                            per_page=per_page,
+                            total_pages=(total_authors // per_page) + (1 if total_authors % per_page else 0),
+                           )
 
 @author_bp.route("/author/delete/<int:id>",methods=['GET', 'DELETE'])
 def delete_author(id : int):
