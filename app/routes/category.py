@@ -16,7 +16,20 @@ def add_category():
 def category():
     form = CategoryForm()
     categories = category_service.get_all()
-    return render_template("category/category.html", form=form, categories = categories)
+    total_categories = len(categories)  
+    page = request.args.get("page", 1, type=int)  
+    per_page = 5  
+    start = (page-1) * per_page
+    end = start + per_page
+
+    paginated_categories = categories[start:end]
+    
+    return render_template("category/category.html", 
+                            form=form, 
+                            categories = paginated_categories,
+                            page=page,
+                            per_page=per_page,
+                            total_pages=(total_categories // per_page) + (1 if total_categories % per_page else 0),)
 
 @category_bp.route("/category/delete/<int:id>",methods=['GET', 'DELETE'])
 def delete_category(id : int):
