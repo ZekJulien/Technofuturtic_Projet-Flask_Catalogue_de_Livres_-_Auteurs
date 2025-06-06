@@ -1571,6 +1571,9 @@
   .border-error {
     border-color: var(--color-error);
   }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
   .table-zebra {
     tbody {
       tr {
