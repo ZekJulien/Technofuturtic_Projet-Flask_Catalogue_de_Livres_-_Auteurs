@@ -5,7 +5,6 @@ from .database import init_db
 from .routes import blueprints
 
 url_db = f"{os.getenv("SCHEME")}://{os.getenv("USERNAME_DB")}:{os.getenv("PASSWORD_DB")}@{os.getenv("HOSTNAME_DB")}:{os.getenv("PORT")}/{os.getenv("DATABASE_NAME")}"
-print(url_db)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
