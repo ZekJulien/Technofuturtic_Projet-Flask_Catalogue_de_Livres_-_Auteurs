@@ -14,6 +14,61 @@ This project aims to develop a web application using Flask based on the **Model-
 - **Flask-WTF** for form handling (protected by CSRF)
 - **DaisyUI** for styling
 
+## 🐍 Installation and Usage  
+
+### ℹ️ **Note**  
+This project was developed in **Python 3.13**, so it is designed to run on this version.  
+It is recommended to use the same version to ensure compatibility and avoid issues related to changes in standard libraries or dependencies.  
+
+### 1️⃣ **Clone the Project**  
+Start by retrieving the source code on your machine:  
+
+    git clone https://github.com/ZekJulien/Technofuturtic_Projet-Flask_Catalogue_de_Livres_-_Auteurs
+
+### 2️⃣ **Using a Virtual Environment**
+It is recommended to use a virtual environment to isolate project dependencies (run at the root of the cloned repository): 
+
+    py -3 -m venv .venv
+
+### 3️⃣ **Activate the Virtual Environment**
+Depending on your OS:
+#### Windows  :
+
+    .\.venv\Scripts\activate
+#### MacOs/Linux  :
+
+    source .venv/bin/activate
+
+
+### 4️⃣ **Install Dependencies**
+Once the virtual environment is activated, install the required libraries by running:
+
+    pip install -r requirements.txt
+
+### 5️⃣ **Setup your .env**
+#### 🔹 Why is this necessary?  
+The `.env-example` file contains **template environment variables** that must be copied and configured to ensure the application works correctly.  
+This step ensures that Flask and SQLAlchemy have access to the required configurations, like database credentials and secret keys.
+#### 📂 Copying the `.env-example` file  
+Run the following command in the **root of the project** to create your `.env` file inside `.venv/`:  
+#### Windows  :
+
+    copy .env-example .venv\.env
+
+#### MacOs/Linux  :
+
+    cp .env-example .venv/.env
+
+### 🛠️ After copying, open .venv/.env and edit the values ✅
+
+
+### 6️⃣ **Run the Application** 
+After installing dependencies, you can launch the application:
+
+    python run.py
+
+
+
 ## 🛠️ Features & Requirements
 Each entity must have complete CRUD functionality:
 - **Create**
@@ -58,8 +113,8 @@ To enhance usability, you may implement:
  ┣ 📂 routes                  # Flask routes (Controllers)
  ┃ ┗ 📜 routes.py             # Application routes
  ┣ 📜 app.py                  # Main application entry point
- ┣ 📜 config.py               # Global settings (Database, environment variables)
 📜 README.md                  # Documentation
 📜 requirements.txt           # List of dependencies required for the project
 📜 exercise.pdf               # Original project instructions and requirements
 📜 run.py                     # Script to start the Flask application
+
