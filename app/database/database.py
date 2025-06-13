@@ -8,7 +8,7 @@ db = SQLAlchemy()
 
 metadata = MetaData()
 
-engine = create_engine(f"{os.getenv("SCHEME")}://{os.getenv("USERNAME_DB")}:{os.getenv("PASSWORD_DB")}@{os.getenv("HOSTNAME")}:{int(os.getenv("PORT"))}/{os.getenv("DATABASE_NAME")}")
+engine = create_engine(f"{os.getenv("SCHEME")}://{os.getenv("USERNAME_DB")}:{os.getenv("PASSWORD_DB")}@{os.getenv("HOSTNAME_DB")}:{int(os.getenv("PORT"))}/{os.getenv("DATABASE_NAME")}")
 
 session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
